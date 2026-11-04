@@ -17,6 +17,9 @@
   --hair: rgba(255,255,255,.12); --hair-2: rgba(255,255,255,.22);
   --white: #FFFFFF; --soft: #D9D6D2; --grey: #A9A5A0; --grey-dim: #7C7873;
   --accent: #CD5537; --accent-soft: rgba(205,85,55,.16);
+  /* subject colors: one hue per assunto, all tuned for the ink ground */
+  --c-dody: #E0714F;    --c-jaime: #D9B35A;   --c-grupo: #B59CE6;
+  --c-gramado: #7FC9A3; --c-clubmed: #6FB7E0; --c-ceara: #E8A24F;
   --display: "PP Pangaia", "Playfair Display", Georgia, serif;
   --sans: "Rethink Sans", "Helvetica Neue", Arial, sans-serif;
   --ease: cubic-bezier(.22,.61,.36,1);
@@ -35,13 +38,12 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .eyebrow { font-size: .68rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--grey-dim); }
 
 .top {
-  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  position: relative; z-index: 5;
   background: var(--ink-deep); border-bottom: 1px solid var(--hair);
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 14px;
 }
 .top-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-@media (max-width: 600px) { .top { position: static; } .top-actions { margin-left: 0; } }
 .brand { display: flex; align-items: center; gap: 16px; min-width: 0; }
 .brand img { height: 30px; width: auto; display: block; }
 .brand .sep { width: 1px; height: 28px; background: var(--hair-2); }
@@ -68,6 +70,18 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .stat .n { display: block; font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 500; color: var(--white); line-height: 1; font-variant-numeric: tabular-nums; }
 .stat .l { display: block; margin-top: 8px; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--grey-dim); }
 
+.toolbar-wrap { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 4; background: var(--ink-deep); border-bottom: 1px solid var(--hair);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 12px; }
+@media (max-width: 600px) { .toolbar-wrap { position: static; } }
+.toolbar { max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: flex-end; }
+.tb-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.tb-search { flex: 1 1 220px; }
+.tb-outlet { flex: 1 1 200px; max-width: 320px; }
+.dates { display: flex; gap: 8px; }
+.dates label { display: flex; align-items: center; gap: 6px; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--grey-dim); }
+.date-in { padding: 6px 8px; border: 1px solid var(--hair-2); border-radius: 2px; background: var(--ink-2); color: var(--soft); font-size: .82rem; }
+.toolbar .clear { align-self: flex-end; padding-bottom: 8px; }
+@media (max-width: 600px) { .tb-search, .tb-outlet { flex-basis: 100%; max-width: none; } }
 .wrap {
   max-width: 1240px; margin: 0 auto;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
@@ -76,7 +90,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 @media (max-width: 820px) { .wrap { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
 
-.rail { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 78px); display: flex; flex-direction: column; gap: 24px; }
+.rail { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 96px); display: flex; flex-direction: column; gap: 24px; }
 @media (max-width: 820px) { .rail { position: static; } }
 .group { display: flex; flex-direction: column; gap: 10px; }
 .search { width: 100%; padding: 10px 12px; border: 1px solid var(--hair-2); border-radius: 2px; background: var(--ink-2); color: var(--white); }
@@ -92,13 +106,16 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 @media (max-width: 820px) { .subj { width: auto; border: 1px solid var(--hair-2); border-radius: 2px; padding: 7px 10px; } }
 .subj:hover { background: var(--ink-2); }
-.subj .mark { width: 8px; height: 8px; border: 1px solid var(--grey-dim); transform: rotate(45deg); flex: none; transition: all .2s var(--ease); }
+.subj { --c: var(--grey); }
+.subj .mark { width: 9px; height: 9px; border: 1px solid var(--c); transform: rotate(45deg); flex: none; transition: all .2s var(--ease); }
+.subj .nm { color: var(--soft); }
 .subj .nm { flex: 1; min-width: 0; font-size: .92rem; }
 .subj .kind { display: block; font-size: .64rem; color: var(--grey-dim); text-transform: uppercase; letter-spacing: .12em; margin-top: 1px; }
 .subj .ct { font-size: .78rem; color: var(--grey-dim); font-variant-numeric: tabular-nums; }
-.subj[aria-pressed="true"] { color: var(--white); }
-.subj[aria-pressed="true"] .mark { background: var(--accent); border-color: var(--accent); }
-.subj[aria-pressed="true"] .ct { color: var(--accent); }
+.subj[aria-pressed="true"] { background: color-mix(in srgb, var(--c) 14%, transparent); }
+.subj[aria-pressed="true"] .nm { color: var(--white); font-weight: 600; }
+.subj[aria-pressed="true"] .mark { background: var(--c); }
+.subj[aria-pressed="true"] .ct { color: var(--c); }
 
 .seg { display: flex; flex-wrap: wrap; gap: 6px; }
 .seg button { border: 1px solid var(--hair-2); background: transparent; color: var(--grey); border-radius: 2px; padding: 5px 11px; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
@@ -128,8 +145,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .hl a:hover { color: var(--soft); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; text-decoration-color: var(--accent); }
 .sum { margin: 0; color: var(--grey); font-size: .92rem; max-width: 70ch; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
-.tag { font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; padding: 3px 9px; border-radius: 2px; border: 1px solid var(--hair-2); background: transparent; color: var(--grey); cursor: pointer; transition: all .2s var(--ease); }
-.tag:hover { border-color: var(--accent); color: var(--white); }
+.tag { --c: var(--grey); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; padding: 3px 9px; border-radius: 2px; border: 1px solid color-mix(in srgb, var(--c) 55%, transparent); background: color-mix(in srgb, var(--c) 12%, transparent); color: var(--c); cursor: pointer; transition: all .2s var(--ease); }
+.tag:hover { border-color: var(--c); background: color-mix(in srgb, var(--c) 24%, transparent); color: var(--white); }
 .meta-row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; font-size: .76rem; color: var(--grey-dim); }
 .meta-row .src { overflow-wrap: anywhere; }
 .rm { background: none; border: 0; color: var(--grey-dim); cursor: pointer; font-size: .74rem; padding: 0; text-decoration: underline; text-underline-offset: 3px; }
@@ -191,17 +208,17 @@ button, input, select, textarea { font: inherit; color: inherit; }
   </div>
 </section>
 
-<main class="wrap">
-  <aside class="rail" aria-label="Filtros">
-    <div class="group">
+<div class="toolbar-wrap">
+  <div class="toolbar" aria-label="Filtros">
+    <div class="tb-field tb-search">
       <label class="eyebrow" for="q">Buscar</label>
       <input class="search" id="q" type="search" placeholder="Título, veículo ou trecho">
     </div>
-    <div class="group">
-      <span class="eyebrow">Assunto</span>
-      <div class="subjects" id="subjects"></div>
+    <div class="tb-field tb-outlet">
+      <label class="eyebrow" for="outlet">Veículo</label>
+      <select class="select" id="outlet"><option value="">Todos os veículos</option></select>
     </div>
-    <div class="group">
+    <div class="tb-field">
       <span class="eyebrow">Período</span>
       <div class="seg" id="period">
         <button type="button" data-p="30" aria-pressed="false">30 dias</button>
@@ -210,11 +227,14 @@ button, input, select, textarea { font: inherit; color: inherit; }
         <button type="button" data-p="all" aria-pressed="true">Tudo</button>
       </div>
     </div>
-    <div class="group">
-      <label class="eyebrow" for="outlet">Veículo</label>
-      <select class="select" id="outlet"><option value="">Todos os veículos</option></select>
+    <div class="tb-field">
+      <span class="eyebrow">Datas</span>
+      <div class="dates">
+        <label><span>De</span><input class="date-in" id="dFrom" type="date"></label>
+        <label><span>Até</span><input class="date-in" id="dTo" type="date"></label>
+      </div>
     </div>
-    <div class="group">
+    <div class="tb-field">
       <span class="eyebrow">Ordem</span>
       <div class="seg" id="order">
         <button type="button" data-o="desc" aria-pressed="true">Recentes</button>
@@ -222,6 +242,15 @@ button, input, select, textarea { font: inherit; color: inherit; }
       </div>
     </div>
     <button class="clear" id="clearBtn" type="button" hidden>Limpar filtros</button>
+  </div>
+</div>
+
+<main class="wrap">
+  <aside class="rail" aria-label="Assuntos">
+    <div class="group">
+      <span class="eyebrow">Assunto</span>
+      <div class="subjects" id="subjects"></div>
+    </div>
   </aside>
 
   <section aria-label="Matérias">
@@ -242,24 +271,25 @@ button, input, select, textarea { font: inherit; color: inherit; }
     <div><h3>RSS dos veículos</h3><p>Panrotas, Hotelier News, Mercado &amp; Eventos, Gramado Magazine, Acontece Gramado, Portal IN, Revista Hotéis, Brasilturis e outros do setor.</p></div>
     <div><h3>Inclusão manual</h3><p>Editores adicionam no painel interno o que chegar por assessoria, TV, rádio ou impresso.</p></div>
   </div>
-  <div class="foot">Grupo Sirena · Clipagem de imprensa · Atualizado automaticamente todos os dias</div>
+  <div class="foot">Grupo Sirena · Clipagem de imprensa · imprensa.gruposirena.com.br · Atualizado automaticamente todos os dias</div>
 </section>
 <div class="toast" id="toast" hidden></div>
 
 <script>
 const SUBJECTS = [
-  { id: "Dody Sirena",      kind: "Diretor" },
-  { id: "Jaime Sirena",     kind: "Diretor" },
-  { id: "Grupo Sirena",     kind: "Empresa" },
-  { id: "Sirena Gramado",   kind: "Projeto" },
-  { id: "Club Med Gramado", kind: "Projeto" },
-  { id: "Sirena Ceará",     kind: "Projeto" },
+  { id: "Dody Sirena",      kind: "Diretor", c: "--c-dody" },
+  { id: "Jaime Sirena",     kind: "Diretor", c: "--c-jaime" },
+  { id: "Grupo Sirena",     kind: "Empresa", c: "--c-grupo" },
+  { id: "Sirena Gramado",   kind: "Projeto", c: "--c-gramado" },
+  { id: "Club Med Gramado", kind: "Projeto", c: "--c-clubmed" },
+  { id: "Sirena Ceará",     kind: "Projeto", c: "--c-ceara" },
 ];
+const subjColor = id => { const s = SUBJECTS.find(x => x.id === id); return `--c: var(${s ? s.c : "--grey"})`; };
 const MESES = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
 const MES_CURTO = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
 
-const state = { items: [], meta: null, subjects: new Set(), period: "all", outlet: "", q: "", order: "desc", loaded: false, canEdit: false };
-let db = null, downloads = null, pendingRemove = null;
+const state = { items: [], meta: null, subjects: new Set(), period: "all", from: "", to: "", outlet: "", q: "", order: "desc", loaded: false, canEdit: false };
+let pendingRemove = null;
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
@@ -282,11 +312,14 @@ function fmtDateTime(iso) {
 
 function filtered() {
   const now = new Date();
-  const minDate = state.period === "all" ? null : new Date(now.getTime() - Number(state.period) * 864e5).toISOString().slice(0, 10);
+  let minDate = state.period === "all" ? null : new Date(now.getTime() - Number(state.period) * 864e5).toISOString().slice(0, 10);
+  if (state.from && (!minDate || state.from > minDate)) minDate = state.from;
+  const maxDate = state.to || null;
   const q = norm(state.q);
   const list = state.items.filter(it => {
     if (state.subjects.size && !(it.assuntos || []).some(a => state.subjects.has(a))) return false;
     if (minDate && (it.data || "") < minDate) return false;
+    if (maxDate && (it.data || "") > maxDate) return false;
     if (state.outlet && it.veiculo !== state.outlet) return false;
     if (q && !norm(`${it.titulo} ${it.veiculo} ${it.resumo}`).includes(q)) return false;
     return true;
@@ -299,7 +332,7 @@ function renderSubjects() {
   const counts = {};
   for (const it of state.items) for (const a of it.assuntos || []) counts[a] = (counts[a] || 0) + 1;
   $("subjects").innerHTML = SUBJECTS.map(s => `
-    <button type="button" class="subj" data-s="${esc(s.id)}" aria-pressed="${state.subjects.has(s.id)}">
+    <button type="button" class="subj" data-s="${esc(s.id)}" aria-pressed="${state.subjects.has(s.id)}" style="${subjColor(s.id)}">
       <span class="mark" aria-hidden="true"></span>
       <span class="nm">${esc(s.id)}<span class="kind">${s.kind}</span></span>
       <span class="ct">${counts[s.id] || 0}</span>
@@ -324,7 +357,7 @@ function renderStatus() {
 }
 function renderFeed() {
   const list = filtered();
-  const active = state.subjects.size || state.period !== "all" || state.outlet || state.q;
+  const active = state.subjects.size || state.period !== "all" || state.from || state.to || state.outlet || state.q;
   $("clearBtn").hidden = !active;
   if (!state.loaded) return;
   $("count").innerHTML = `<b>${list.length}</b> ${list.length === 1 ? "matéria" : "matérias"}${active ? " com estes filtros" : ""}`;
@@ -352,7 +385,7 @@ function renderFeed() {
         <div class="outlet">${esc(it.veiculo)}</div>
         <h3 class="hl"><a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.titulo)}</a></h3>
         ${it.resumo ? `<p class="sum">${esc(it.resumo)}</p>` : ""}
-        <div class="tags">${(it.assuntos || []).map(a => `<button type="button" class="tag" data-s="${esc(a)}">${esc(a)}</button>`).join("")}</div>
+        <div class="tags">${(it.assuntos || []).map(a => `<button type="button" class="tag" data-s="${esc(a)}" style="${subjColor(a)}">${esc(a)}</button>`).join("")}</div>
         <div class="meta-row"><span class="src">${esc(host)}</span>${state.canEdit ? `<button type="button" class="rm${pendingRemove === it._id ? " confirm" : ""}" data-rm="${esc(it._id)}">${pendingRemove === it._id ? "Confirmar remoção" : "Remover"}</button>` : ""}</div>
       </div>
     </article>`;
@@ -380,9 +413,11 @@ $("order").addEventListener("click", e => {
   renderFeed();
 });
 $("outlet").addEventListener("change", e => { state.outlet = e.target.value; renderFeed(); });
+$("dFrom").addEventListener("change", e => { state.from = e.target.value; renderFeed(); });
+$("dTo").addEventListener("change", e => { state.to = e.target.value; renderFeed(); });
 let qT; $("q").addEventListener("input", e => { clearTimeout(qT); qT = setTimeout(() => { state.q = e.target.value; renderFeed(); }, 150); });
 $("clearBtn").addEventListener("click", () => {
-  state.subjects.clear(); state.period = "all"; state.outlet = ""; state.q = ""; $("q").value = "";
+  state.subjects.clear(); state.period = "all"; state.from = ""; state.to = ""; state.outlet = ""; state.q = ""; $("q").value = ""; $("dFrom").value = ""; $("dTo").value = "";
   [...$("period").children].forEach(x => x.setAttribute("aria-pressed", x.dataset.p === "all"));
   renderAll();
 });
