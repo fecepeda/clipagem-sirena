@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%230B0B0B'/%3E%3Cpath d='M6.5 3.5h11l5.5 8.5-5.5 8.5h-11L1 12z' fill='none' stroke='%23fff' stroke-width='1.6'/%3E%3C/svg%3E">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Clipagem Sirena</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Rethink+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Grupo Sirena identity (gruposirena.com.br): ink-dark ground, soft warm greys, terracotta accent, serif display in caps, Rethink Sans body. Single dark theme by design. Layout: filter rail left, chronological feed grouped by month right; stacks on phones. */
+:root {
+  --black: #0B0B0B; --ink: #1E1E1E; --ink-deep: #141414; --ink-2: #262626; --surface: #2A2A2A;
+  --hair: rgba(255,255,255,.12); --hair-2: rgba(255,255,255,.22);
+  --white: #FFFFFF; --soft: #D9D6D2; --grey: #A9A5A0; --grey-dim: #7C7873;
+  --accent: #CD5537; --accent-soft: rgba(205,85,55,.16);
+  --display: "PP Pangaia", "Playfair Display", Georgia, serif;
+  --sans: "Rethink Sans", "Helvetica Neue", Arial, sans-serif;
+  --ease: cubic-bezier(.22,.61,.36,1);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; }
+body { background: var(--ink); color: var(--soft); font-family: var(--sans); font-size: 15px; line-height: 1.55; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--ink-deep); }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+::selection { background: var(--accent); color: var(--white); }
+
+.cap { font-family: var(--display); text-transform: uppercase; letter-spacing: .02em; font-weight: 700; }
+.eyebrow { font-size: .68rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--grey-dim); }
+
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--ink-deep); border-bottom: 1px solid var(--hair);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 14px;
+}
+.top-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+@media (max-width: 600px) { .top { position: static; } .top-actions { margin-left: 0; } }
+.brand { display: flex; align-items: center; gap: 16px; min-width: 0; }
+.brand img { height: 30px; width: auto; display: block; }
+.brand .sep { width: 1px; height: 28px; background: var(--hair-2); }
+.brand h1 { margin: 0; font-size: .95rem; letter-spacing: .14em; color: var(--white); }
+.status { font-size: .78rem; color: var(--grey); display: flex; align-items: center; gap: 8px; }
+.status .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.top-actions { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+.btn { border: 1px solid var(--hair-2); background: transparent; color: var(--soft); border-radius: 2px; padding: 8px 14px; cursor: pointer; font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; transition: border-color .2s var(--ease), background .2s var(--ease); }
+.btn:hover { border-color: var(--soft); }
+.btn.primary { background: var(--accent); color: var(--white); border-color: var(--accent); }
+.btn.primary:hover { background: #B84A2F; border-color: #B84A2F; }
+
+.hero {
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 28px; border-bottom: 1px solid var(--hair);
+}
+.hero-inner { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 32px; align-items: end; }
+@media (max-width: 820px) { .hero-inner { grid-template-columns: minmax(0, 1fr); gap: 20px; } }
+.hero h2 { margin: 6px 0 10px; font-size: clamp(1.6rem, 3.2vw, 2.4rem); line-height: 1.05; color: var(--white); text-wrap: balance; }
+.hero p { margin: 0; color: var(--grey); max-width: 58ch; }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-left: 1px solid var(--hair); }
+@media (max-width: 480px) { .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.stat { padding: 4px 18px; border-right: 1px solid var(--hair); min-width: 0; }
+.stat .n { display: block; font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 500; color: var(--white); line-height: 1; font-variant-numeric: tabular-nums; }
+.stat .l { display: block; margin-top: 8px; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--grey-dim); }
+
+.wrap {
+  max-width: 1240px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 72px;
+  display: grid; grid-template-columns: 272px minmax(0, 1fr); gap: 40px; align-items: start;
+}
+@media (max-width: 820px) { .wrap { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
+
+.rail { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 78px); display: flex; flex-direction: column; gap: 24px; }
+@media (max-width: 820px) { .rail { position: static; } }
+.group { display: flex; flex-direction: column; gap: 10px; }
+.search { width: 100%; padding: 10px 12px; border: 1px solid var(--hair-2); border-radius: 2px; background: var(--ink-2); color: var(--white); }
+.search::placeholder { color: var(--grey-dim); }
+.select { width: 100%; padding: 9px 10px; border: 1px solid var(--hair-2); border-radius: 2px; background: var(--ink-2); color: var(--soft); }
+
+.subjects { display: flex; flex-direction: column; border-top: 1px solid var(--hair); }
+@media (max-width: 820px) { .subjects { flex-direction: row; flex-wrap: wrap; gap: 6px; border-top: 0; } }
+.subj {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  border: 0; border-bottom: 1px solid var(--hair); background: transparent; color: var(--soft);
+  padding: 10px 6px; cursor: pointer; text-align: left; transition: background .2s var(--ease);
+}
+@media (max-width: 820px) { .subj { width: auto; border: 1px solid var(--hair-2); border-radius: 2px; padding: 7px 10px; } }
+.subj:hover { background: var(--ink-2); }
+.subj .mark { width: 8px; height: 8px; border: 1px solid var(--grey-dim); transform: rotate(45deg); flex: none; transition: all .2s var(--ease); }
+.subj .nm { flex: 1; min-width: 0; font-size: .92rem; }
+.subj .kind { display: block; font-size: .64rem; color: var(--grey-dim); text-transform: uppercase; letter-spacing: .12em; margin-top: 1px; }
+.subj .ct { font-size: .78rem; color: var(--grey-dim); font-variant-numeric: tabular-nums; }
+.subj[aria-pressed="true"] { color: var(--white); }
+.subj[aria-pressed="true"] .mark { background: var(--accent); border-color: var(--accent); }
+.subj[aria-pressed="true"] .ct { color: var(--accent); }
+
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg button { border: 1px solid var(--hair-2); background: transparent; color: var(--grey); border-radius: 2px; padding: 5px 11px; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+.seg button:hover { color: var(--soft); border-color: var(--soft); }
+.seg button[aria-pressed="true"] { background: var(--soft); color: var(--ink); border-color: var(--soft); }
+.clear { align-self: flex-start; background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer; font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 600; }
+
+.feedhead { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1px solid var(--hair-2); }
+.feedhead .count { font-family: var(--display); font-size: 1.1rem; color: var(--white); }
+.feedhead .count b { color: var(--accent); font-weight: 600; }
+.notice { margin-top: 14px; padding: 10px 12px; border-left: 2px solid var(--accent); background: var(--ink-2); font-size: .88rem; color: var(--grey); }
+
+.month { margin-top: 32px; }
+.month h2 { margin: 0 0 4px; font-size: .72rem; letter-spacing: .18em; color: var(--grey-dim); display: flex; gap: 12px; align-items: center; }
+.month h2 span { white-space: nowrap; }
+.month h2::after { content: ""; flex: 1; height: 1px; background: var(--hair); }
+.item { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--hair); }
+.item:last-child { border-bottom: 0; }
+.date { font-variant-numeric: tabular-nums; }
+.date .d { display: block; font-family: var(--display); font-size: 1.7rem; line-height: 1; font-weight: 500; color: var(--white); }
+.date .m { display: block; font-size: .66rem; color: var(--grey-dim); text-transform: uppercase; letter-spacing: .14em; margin-top: 6px; }
+.date .approx { display: block; font-size: .62rem; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; margin-top: 6px; }
+.body { min-width: 0; display: flex; flex-direction: column; gap: 7px; }
+.outlet { font-size: .68rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+.hl { margin: 0; font-family: var(--display); font-weight: 600; font-size: 1.18rem; line-height: 1.3; color: var(--white); text-wrap: balance; }
+.hl a { text-decoration: none; transition: color .2s var(--ease); }
+.hl a:hover { color: var(--soft); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; text-decoration-color: var(--accent); }
+.sum { margin: 0; color: var(--grey); font-size: .92rem; max-width: 70ch; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+.tag { font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; padding: 3px 9px; border-radius: 2px; border: 1px solid var(--hair-2); background: transparent; color: var(--grey); cursor: pointer; transition: all .2s var(--ease); }
+.tag:hover { border-color: var(--accent); color: var(--white); }
+.meta-row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; font-size: .76rem; color: var(--grey-dim); }
+.meta-row .src { overflow-wrap: anywhere; }
+.rm { background: none; border: 0; color: var(--grey-dim); cursor: pointer; font-size: .74rem; padding: 0; text-decoration: underline; text-underline-offset: 3px; }
+.rm.confirm { color: var(--accent); font-weight: 600; }
+
+.empty { margin-top: 32px; padding: 32px; border: 1px dashed var(--hair-2); }
+.empty h3 { margin: 0 0 8px; font-family: var(--display); font-weight: 600; color: var(--white); text-transform: uppercase; letter-spacing: .04em; font-size: 1rem; }
+.empty p { margin: 0; color: var(--grey); max-width: 60ch; }
+
+.sheet { margin-top: 16px; padding: 20px; background: var(--ink-2); border: 1px solid var(--hair); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 600px) { .sheet { grid-template-columns: minmax(0, 1fr); } }
+.sheet .full { grid-column: 1 / -1; }
+.sheet label { display: flex; flex-direction: column; gap: 4px; font-size: .76rem; color: var(--grey); letter-spacing: .06em; text-transform: uppercase; }
+.sheet input, .sheet textarea { padding: 9px 10px; border: 1px solid var(--hair-2); border-radius: 2px; background: var(--ink); color: var(--white); text-transform: none; letter-spacing: 0; }
+.sheet .checks { display: flex; flex-wrap: wrap; gap: 10px 16px; }
+.sheet .checks label { flex-direction: row; align-items: center; gap: 6px; color: var(--soft); font-size: .85rem; text-transform: none; letter-spacing: 0; }
+.sheet .actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.sheet .err { color: var(--accent); font-size: .85rem; }
+
+.sources { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 48px; border-top: 1px solid var(--hair); }
+.sources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px 32px; margin-top: 14px; }
+.sources h3 { margin: 0 0 6px; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--white); font-weight: 600; }
+.sources p { margin: 0; font-size: .84rem; color: var(--grey); }
+.sources .foot { margin-top: 24px; font-size: .72rem; color: var(--grey-dim); letter-spacing: .06em; }
+
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); background: var(--soft); color: var(--ink); padding: 9px 16px; border-radius: 2px; font-size: .82rem; z-index: 20; letter-spacing: .04em; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <img src="https://gruposirena.com.br/media/lockup-sirena.png" alt="Grupo Sirena" width="92" height="30">
+      <span class="sep" aria-hidden="true"></span>
+      <h1 class="cap">Clipagem</h1>
+    </div>
+    <div class="status" id="status"><span class="dot"></span><span>Conectando ao acervo…</span></div>
+    <div class="top-actions">
+      <button class="btn" id="exportBtn" type="button" hidden>Exportar CSV</button>
+      
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">Monitoramento de imprensa</div>
+      <h2 class="cap">Todas as menções aos diretores e projetos do Grupo</h2>
+      <p>Matérias em ordem cronológica sobre Dody Sirena, Jaime Sirena, Grupo Sirena, Sirena Gramado, Club Med Gramado e Sirena Ceará. Varredura diária em Google Notícias, Bing News, busca na web e RSS dos veículos.</p>
+    </div>
+    <div class="stats" id="stats">
+      <div class="stat"><span class="n" id="s-total">—</span><span class="l">Matérias</span></div>
+      <div class="stat"><span class="n" id="s-outlets">—</span><span class="l">Veículos</span></div>
+      <div class="stat"><span class="n" id="s-30">—</span><span class="l">Últimos 30 dias</span></div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+  <aside class="rail" aria-label="Filtros">
+    <div class="group">
+      <label class="eyebrow" for="q">Buscar</label>
+      <input class="search" id="q" type="search" placeholder="Título, veículo ou trecho">
+    </div>
+    <div class="group">
+      <span class="eyebrow">Assunto</span>
+      <div class="subjects" id="subjects"></div>
+    </div>
+    <div class="group">
+      <span class="eyebrow">Período</span>
+      <div class="seg" id="period">
+        <button type="button" data-p="30" aria-pressed="false">30 dias</button>
+        <button type="button" data-p="90" aria-pressed="false">90 dias</button>
+        <button type="button" data-p="365" aria-pressed="false">12 meses</button>
+        <button type="button" data-p="all" aria-pressed="true">Tudo</button>
+      </div>
+    </div>
+    <div class="group">
+      <label class="eyebrow" for="outlet">Veículo</label>
+      <select class="select" id="outlet"><option value="">Todos os veículos</option></select>
+    </div>
+    <div class="group">
+      <span class="eyebrow">Ordem</span>
+      <div class="seg" id="order">
+        <button type="button" data-o="desc" aria-pressed="true">Recentes</button>
+        <button type="button" data-o="asc" aria-pressed="false">Antigas</button>
+      </div>
+    </div>
+    <button class="clear" id="clearBtn" type="button" hidden>Limpar filtros</button>
+  </aside>
+
+  <section aria-label="Matérias">
+    <div class="feedhead">
+      <div class="count" id="count">Carregando matérias…</div>
+    </div>
+        <div id="notice"></div>
+    <div id="feed"></div>
+  </section>
+</main>
+
+<section class="sources">
+  <div class="eyebrow">Fontes monitoradas</div>
+  <div class="sources-grid">
+    <div><h3>Google Notícias</h3><p>Busca por assunto, com link direto para a matéria original. Lida pelo navegador do Claude nas varreduras completas.</p></div>
+    <div><h3>Bing News</h3><p>Feed RSS por assunto, lido todos os dias na varredura automática.</p></div>
+    <div><h3>Busca na web</h3><p>Pesquisa ampla por nome e projeto para captar portais, colunas e blogs que não entram nos agregadores.</p></div>
+    <div><h3>RSS dos veículos</h3><p>Panrotas, Hotelier News, Mercado &amp; Eventos, Gramado Magazine, Acontece Gramado, Portal IN, Revista Hotéis, Brasilturis e outros do setor.</p></div>
+    <div><h3>Inclusão manual</h3><p>Editores adicionam no painel interno o que chegar por assessoria, TV, rádio ou impresso.</p></div>
+  </div>
+  <div class="foot">Grupo Sirena · Clipagem de imprensa · Atualizado automaticamente todos os dias</div>
+</section>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const SUBJECTS = [
+  { id: "Dody Sirena",      kind: "Diretor" },
+  { id: "Jaime Sirena",     kind: "Diretor" },
+  { id: "Grupo Sirena",     kind: "Empresa" },
+  { id: "Sirena Gramado",   kind: "Projeto" },
+  { id: "Club Med Gramado", kind: "Projeto" },
+  { id: "Sirena Ceará",     kind: "Projeto" },
+];
+const MESES = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+const MES_CURTO = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
+
+const state = { items: [], meta: null, subjects: new Set(), period: "all", outlet: "", q: "", order: "desc", loaded: false, canEdit: false };
+let db = null, downloads = null, pendingRemove = null;
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+const norm = s => String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+
+function urlId(u) {
+  const s = String(u).trim().replace(/[#?].*$/, "").replace(/\/+$/, "").toLowerCase();
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+  return "m" + h.toString(16).padStart(8, "0");
+}
+function toast(msg) {
+  const t = $("toast"); t.textContent = msg; t.hidden = false;
+  clearTimeout(toast._t); toast._t = setTimeout(() => (t.hidden = true), 2600);
+}
+function fmtDateTime(iso) {
+  const d = new Date(iso); if (isNaN(d)) return "";
+  return d.toLocaleString("pt-BR", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
+}
+
+function filtered() {
+  const now = new Date();
+  const minDate = state.period === "all" ? null : new Date(now.getTime() - Number(state.period) * 864e5).toISOString().slice(0, 10);
+  const q = norm(state.q);
+  const list = state.items.filter(it => {
+    if (state.subjects.size && !(it.assuntos || []).some(a => state.subjects.has(a))) return false;
+    if (minDate && (it.data || "") < minDate) return false;
+    if (state.outlet && it.veiculo !== state.outlet) return false;
+    if (q && !norm(`${it.titulo} ${it.veiculo} ${it.resumo}`).includes(q)) return false;
+    return true;
+  });
+  list.sort((a, b) => (a.data < b.data ? -1 : a.data > b.data ? 1 : 0) * (state.order === "asc" ? 1 : -1));
+  return list;
+}
+
+function renderSubjects() {
+  const counts = {};
+  for (const it of state.items) for (const a of it.assuntos || []) counts[a] = (counts[a] || 0) + 1;
+  $("subjects").innerHTML = SUBJECTS.map(s => `
+    <button type="button" class="subj" data-s="${esc(s.id)}" aria-pressed="${state.subjects.has(s.id)}">
+      <span class="mark" aria-hidden="true"></span>
+      <span class="nm">${esc(s.id)}<span class="kind">${s.kind}</span></span>
+      <span class="ct">${counts[s.id] || 0}</span>
+    </button>`).join("");
+}
+function renderOutlets() {
+  const sel = $("outlet");
+  const counts = {};
+  for (const i of state.items) if (i.veiculo) counts[i.veiculo] = (counts[i.veiculo] || 0) + 1;
+  const outlets = Object.keys(counts).sort((a, b) => a.localeCompare(b, "pt-BR"));
+  sel.innerHTML = `<option value="">Todos os veículos (${outlets.length})</option>` + outlets.map(o => `<option value="${esc(o)}" ${o === state.outlet ? "selected" : ""}>${esc(o)} (${counts[o]})</option>`).join("");
+}
+function renderStatus() {
+  if (!state.loaded) return;
+  const total = state.items.length;
+  const when = state.meta?.ultimaAtualizacao ? ` · varredura ${fmtDateTime(state.meta.ultimaAtualizacao)}` : "";
+  $("status").innerHTML = `<span class="dot"></span><span>${total} matéria${total === 1 ? "" : "s"} no acervo${when}</span>`;
+  const cut = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
+  $("s-total").textContent = total;
+  $("s-outlets").textContent = new Set(state.items.map(i => i.veiculo).filter(Boolean)).size;
+  $("s-30").textContent = state.items.filter(i => (i.data || "") >= cut).length;
+}
+function renderFeed() {
+  const list = filtered();
+  const active = state.subjects.size || state.period !== "all" || state.outlet || state.q;
+  $("clearBtn").hidden = !active;
+  if (!state.loaded) return;
+  $("count").innerHTML = `<b>${list.length}</b> ${list.length === 1 ? "matéria" : "matérias"}${active ? " com estes filtros" : ""}`;
+  if (!state.items.length) {
+    $("feed").innerHTML = `<div class="empty"><h3>O acervo ainda está vazio</h3><p>As matérias aparecem aqui em ordem cronológica assim que a varredura encontrar as primeiras. Editores podem incluir uma matéria pelo botão “Adicionar matéria”.</p></div>`;
+    return;
+  }
+  if (!list.length) {
+    $("feed").innerHTML = `<div class="empty"><h3>Nenhuma matéria com estes filtros</h3><p>Amplie o período ou desmarque algum assunto para ver mais resultados.</p></div>`;
+    return;
+  }
+  let html = "", cur = "";
+  for (const it of list) {
+    const [y, m, d] = (it.data || "0000-01-01").split("-");
+    const key = `${y}-${m}`;
+    if (key !== cur) {
+      if (cur) html += `</div>`;
+      cur = key;
+      html += `<div class="month"><h2><span>${MESES[Number(m) - 1]} ${y}</span></h2>`;
+    }
+    let host = ""; try { host = new URL(it.url).hostname.replace(/^www\./, ""); } catch {}
+    html += `<article class="item" data-id="${esc(it._id)}">
+      <div class="date"><span class="d">${d}</span><span class="m">${MES_CURTO[Number(m) - 1]} ${y}</span>${it.dataAprox ? `<span class="approx">data aprox.</span>` : ""}</div>
+      <div class="body">
+        <div class="outlet">${esc(it.veiculo)}</div>
+        <h3 class="hl"><a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.titulo)}</a></h3>
+        ${it.resumo ? `<p class="sum">${esc(it.resumo)}</p>` : ""}
+        <div class="tags">${(it.assuntos || []).map(a => `<button type="button" class="tag" data-s="${esc(a)}">${esc(a)}</button>`).join("")}</div>
+        <div class="meta-row"><span class="src">${esc(host)}</span>${state.canEdit ? `<button type="button" class="rm${pendingRemove === it._id ? " confirm" : ""}" data-rm="${esc(it._id)}">${pendingRemove === it._id ? "Confirmar remoção" : "Remover"}</button>` : ""}</div>
+      </div>
+    </article>`;
+  }
+  html += `</div>`;
+  $("feed").innerHTML = html;
+}
+function renderAll() { renderSubjects(); renderOutlets(); renderStatus(); renderFeed(); }
+
+function toggleSubject(id) { state.subjects.has(id) ? state.subjects.delete(id) : state.subjects.add(id); renderSubjects(); renderFeed(); }
+$("subjects").addEventListener("click", e => { const b = e.target.closest(".subj"); if (b) toggleSubject(b.dataset.s); });
+$("feed").addEventListener("click", async e => {
+  const t = e.target.closest(".tag"); if (t) { state.subjects = new Set([t.dataset.s]); renderSubjects(); renderFeed(); window.scrollTo({ top: 0 }); return; }
+});
+$("period").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  state.period = b.dataset.p;
+  [...$("period").children].forEach(x => x.setAttribute("aria-pressed", x === b));
+  renderFeed();
+});
+$("order").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  state.order = b.dataset.o;
+  [...$("order").children].forEach(x => x.setAttribute("aria-pressed", x === b));
+  renderFeed();
+});
+$("outlet").addEventListener("change", e => { state.outlet = e.target.value; renderFeed(); });
+let qT; $("q").addEventListener("input", e => { clearTimeout(qT); qT = setTimeout(() => { state.q = e.target.value; renderFeed(); }, 150); });
+$("clearBtn").addEventListener("click", () => {
+  state.subjects.clear(); state.period = "all"; state.outlet = ""; state.q = ""; $("q").value = "";
+  [...$("period").children].forEach(x => x.setAttribute("aria-pressed", x.dataset.p === "all"));
+  renderAll();
+});
+
+/* CSV export */
+$("exportBtn").hidden = false;
+$("exportBtn").addEventListener("click", async () => {
+  const rows = [["Data", "Veículo", "Título", "Assuntos", "Resumo", "Link"]].concat(
+    filtered().map(i => [i.data, i.veiculo, i.titulo, (i.assuntos || []).join("; "), i.resumo || "", i.url]));
+  const csv = "﻿" + rows.map(r => r.map(v => `"${String(v ?? "").replace(/"/g, '""')}"`).join(";")).join("\r\n");
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `clipagem-sirena-${new Date().toISOString().slice(0, 10)}.csv`; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000); toast("CSV exportado");
+});
+
+/* Boot (site público): materias.json = base; novas.json = acréscimos diários da varredura. Mescla por id. */
+renderSubjects();
+(async () => {
+  const load = async f => { try { const r = await fetch("./" + f + "?v=" + Date.now(), { cache: "no-store" }); if (!r.ok) return null; return await r.json(); } catch { return null; } };
+  const base = await load("materias.json"), novas = await load("novas.json");
+  if (!base) {
+    state.loaded = true;
+    $("notice").innerHTML = `<div class="notice">Não foi possível carregar o acervo agora. Recarregue a página mais tarde.</div>`;
+    renderAll(); return;
+  }
+  const byId = new Map();
+  for (const d of (base.materias || [])) byId.set(d.id, d);
+  for (const d of ((novas && novas.materias) || [])) byId.set(d.id, d);
+  for (const id of ((novas && novas.removidas) || [])) byId.delete(id);
+  state.items = [...byId.values()].map(d => ({ _id: d.id, ...d }));
+  state.meta = { ultimaAtualizacao: (novas && novas.atualizadoEm) || base.atualizadoEm };
+  state.loaded = true;
+  renderAll();
+})();
+</script>
+
+</body>
+</html>
