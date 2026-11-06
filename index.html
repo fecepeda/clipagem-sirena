@@ -52,7 +52,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .status .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 .top-actions { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
 .btn { border: 1px solid var(--hair-2); background: transparent; color: var(--soft); border-radius: 2px; padding: 8px 14px; cursor: pointer; font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; transition: border-color .2s var(--ease), background .2s var(--ease); }
+a.btn { text-decoration: none; display: inline-flex; align-items: center; }
 .btn:hover { border-color: var(--soft); }
+.btn:disabled { opacity: .6; cursor: default; }
 .btn.primary { background: var(--accent); color: var(--white); border-color: var(--accent); }
 .btn.primary:hover { background: #B84A2F; border-color: #B84A2F; }
 
@@ -187,8 +189,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
     </div>
     <div class="status" id="status"><span class="dot"></span><span>Conectando ao acervo…</span></div>
     <div class="top-actions">
+      <a class="btn" href="./relatorio.html">Relatório</a>
       <button class="btn" id="exportBtn" type="button" hidden>Exportar CSV</button>
-      
+      <button class="btn" id="refreshBtn" type="button" title="Recarregar o acervo">Atualizar</button>
+      <button class="btn primary" id="suggestBtn" type="button" aria-expanded="false" aria-controls="suggest">Sugerir matéria</button>
     </div>
   </div>
 </header>
@@ -198,13 +202,31 @@ button, input, select, textarea { font: inherit; color: inherit; }
     <div>
       <div class="eyebrow">Monitoramento de imprensa</div>
       <h2 class="cap">Todas as menções aos diretores e projetos do Grupo</h2>
-      <p>Matérias em ordem cronológica sobre Dody Sirena, Jaime Sirena, Grupo Sirena, Sirena Gramado, Club Med Gramado e Sirena Ceará. Varredura diária em Google Notícias, Bing News, busca na web e RSS dos veículos.</p>
+      <p>Matérias em ordem cronológica sobre Dody Sirena, Jaime Sirena, Grupo Sirena, Sirena Gramado, Club Med Gramado e Sirena Ceará. Varredura diária em Google Alerts, Bing News, busca na web, RSS dos veículos e sugestões enviadas por esta página.</p>
     </div>
     <div class="stats" id="stats">
       <div class="stat"><span class="n" id="s-total">—</span><span class="l">Matérias</span></div>
       <div class="stat"><span class="n" id="s-outlets">—</span><span class="l">Veículos</span></div>
       <div class="stat"><span class="n" id="s-30">—</span><span class="l">Últimos 30 dias</span></div>
     </div>
+  </div>
+  <div class="hero-inner" style="grid-template-columns:minmax(0,1fr)">
+    <form class="sheet" id="suggest" hidden novalidate>
+      <div class="full">
+        <div class="eyebrow">Sugerir matéria</div>
+        <p style="margin:6px 0 0;color:var(--grey);font-size:.9rem;max-width:70ch">Encontrou uma matéria que a varredura não pegou? Cole o link abaixo. A sugestão chega por e-mail à equipe de clipagem e entra no acervo na varredura seguinte, depois de verificada. Editores com acesso ao painel interno também podem incluir diretamente.</p>
+      </div>
+      <label class="full">Link da matéria<input id="sgUrl" type="url" placeholder="https://…" required inputmode="url" autocomplete="off"></label>
+      <label>Veículo (opcional)<input id="sgOutlet" type="text" placeholder="Ex.: Jornal do Comércio"></label>
+      <label>Seu nome (opcional)<input id="sgName" type="text" placeholder="Quem está sugerindo"></label>
+      <label class="full">Observação (opcional)<textarea id="sgNote" rows="2" placeholder="Assunto citado, data, trecho relevante…"></textarea></label>
+      <div class="actions full">
+        <button class="btn primary" type="submit">Enviar por e-mail</button>
+        <a class="btn" id="panelLink" href="https://claude.ai/artifact/XyNLXZ8CrXTSoN5Wyatrta" target="_blank" rel="noopener">Abrir painel interno</a>
+        <button class="btn" type="button" id="sgCancel">Fechar</button>
+        <span class="err" id="sgErr" hidden></span>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -265,11 +287,11 @@ button, input, select, textarea { font: inherit; color: inherit; }
 <section class="sources">
   <div class="eyebrow">Fontes monitoradas</div>
   <div class="sources-grid">
-    <div><h3>Google Notícias</h3><p>Busca por assunto, com link direto para a matéria original. Lida pelo navegador do Claude nas varreduras completas.</p></div>
+    <div><h3>Google Alerts</h3><p>Alertas por assunto entregues por e-mail e lidos todos os dias pela varredura automática (o Google Notícias não permite leitura direta).</p></div>
     <div><h3>Bing News</h3><p>Feed RSS por assunto, lido todos os dias na varredura automática.</p></div>
     <div><h3>Busca na web</h3><p>Pesquisa ampla por nome e projeto para captar portais, colunas e blogs que não entram nos agregadores.</p></div>
-    <div><h3>RSS dos veículos</h3><p>Panrotas, Hotelier News, Mercado &amp; Eventos, Gramado Magazine, Acontece Gramado, Portal IN, Revista Hotéis, Brasilturis e outros do setor.</p></div>
-    <div><h3>Inclusão manual</h3><p>Editores adicionam no painel interno o que chegar por assessoria, TV, rádio ou impresso.</p></div>
+    <div><h3>RSS dos veículos</h3><p>Gramado Magazine, Acontece Gramado, Hotelier News, Turismo&amp;Eventos, Melhores Destinos, VOENEWS, Rádio Pampa, O Sul, Turismo em Foco, Coletiva.net e Jornal do Comércio.</p></div>
+    <div><h3>Sugestões e inclusão manual</h3><p>Links enviados pelo botão “Sugerir matéria” chegam por e-mail e entram após verificação. Editores adicionam no painel interno o que chegar por assessoria, TV, rádio ou impresso.</p></div>
   </div>
   <div class="foot">Grupo Sirena · Clipagem de imprensa · imprensa.gruposirena.com.br · Atualizado automaticamente todos os dias</div>
 </section>
@@ -433,16 +455,40 @@ $("exportBtn").addEventListener("click", async () => {
   setTimeout(() => URL.revokeObjectURL(a.href), 2000); toast("CSV exportado");
 });
 
-/* Boot (site público): materias.json = base; novas.json = acréscimos diários da varredura. Mescla por id. */
-renderSubjects();
-(async () => {
-  const load = async f => { try { const r = await fetch("./" + f + "?v=" + Date.now(), { cache: "no-store" }); if (!r.ok) return null; return await r.json(); } catch { return null; } };
+/* Sugestão de matéria: abre o cliente de e-mail com os dados preenchidos (o site é estático; a varredura diária lê esses e-mails). */
+const CLIP_MAIL = "felipe@gruposirena.com.br";
+const mailto = (subject, body) => `mailto:${CLIP_MAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+function openSuggest(open) {
+  $("suggest").hidden = !open; $("suggestBtn").setAttribute("aria-expanded", String(open));
+  if (open) { $("sgUrl").focus(); $("suggest").scrollIntoView({ behavior: "smooth", block: "nearest" }); }
+}
+$("suggestBtn").addEventListener("click", () => openSuggest($("suggest").hidden));
+$("sgCancel").addEventListener("click", () => openSuggest(false));
+$("suggest").addEventListener("submit", e => {
+  e.preventDefault();
+  const url = $("sgUrl").value.trim(); let ok = false;
+  try { const u = new URL(url); ok = /^https?:$/.test(u.protocol); } catch {}
+  if (!ok) { $("sgErr").textContent = "Cole um link completo, começando com http:// ou https://"; $("sgErr").hidden = false; $("sgUrl").focus(); return; }
+  $("sgErr").hidden = true;
+  if (state.items.some(i => urlId(i.url) === urlId(url))) { toast("Esta matéria já está no acervo"); return; }
+  const body = [
+    "Sugestão de matéria para a Clipagem Sirena", "",
+    `Link: ${url}`,
+    `Veículo: ${$("sgOutlet").value.trim() || "(não informado)"}`,
+    `Enviado por: ${$("sgName").value.trim() || "(não informado)"}`,
+    `Observação: ${$("sgNote").value.trim() || "—"}`, "",
+    `Enviado pela página ${location.href.split("?")[0]} em ${new Date().toLocaleString("pt-BR")}`,
+  ].join("\n");
+  location.href = mailto("[Clipagem Sirena] Sugestão de matéria", body);
+  toast("Abrindo seu e-mail com a sugestão preenchida");
+  setTimeout(() => { $("suggest").reset(); openSuggest(false); }, 1200);
+});
+
+/* Carga do acervo (site público): materias.json = base; novas.json = acréscimos diários da varredura. Mescla por id. */
+const load = async f => { try { const r = await fetch("./" + f + "?v=" + Date.now(), { cache: "no-store" }); if (!r.ok) return null; return await r.json(); } catch { return null; } };
+async function loadArchive() {
   const base = await load("materias.json"), novas = await load("novas.json");
-  if (!base) {
-    state.loaded = true;
-    $("notice").innerHTML = `<div class="notice">Não foi possível carregar o acervo agora. Recarregue a página mais tarde.</div>`;
-    renderAll(); return;
-  }
+  if (!base) return false;
   const byId = new Map();
   for (const d of (base.materias || [])) byId.set(d.id, d);
   for (const d of ((novas && novas.materias) || [])) byId.set(d.id, d);
@@ -450,7 +496,36 @@ renderSubjects();
   state.items = [...byId.values()].map(d => ({ _id: d.id, ...d }));
   state.meta = { ultimaAtualizacao: (novas && novas.atualizadoEm) || base.atualizadoEm };
   state.loaded = true;
-  renderAll();
+  return true;
+}
+function staleNotice() {
+  const iso = state.meta?.ultimaAtualizacao; if (!iso) return;
+  const hours = (Date.now() - new Date(iso).getTime()) / 36e5;
+  if (!(hours > 24)) { $("notice").innerHTML = ""; return; }
+  const days = Math.floor(hours / 24);
+  const body = `Pedido de varredura da Clipagem Sirena.\n\nÚltima varredura registrada: ${fmtDateTime(iso)} (há ${days} dia${days === 1 ? "" : "s"}).\nSolicitado pela página ${location.href.split("?")[0]} em ${new Date().toLocaleString("pt-BR")}.`;
+  $("notice").innerHTML = `<div class="notice">A última varredura automática foi em ${fmtDateTime(iso)}, há ${days} dia${days === 1 ? "" : "s"}. <a href="${mailto("[Clipagem Sirena] Pedido de varredura", body)}" style="color:var(--accent);font-weight:600">Pedir uma varredura agora</a> — o pedido vai por e-mail à equipe, que roda a varredura pelo Claude.</div>`;
+}
+$("refreshBtn").addEventListener("click", async () => {
+  const b = $("refreshBtn"); b.disabled = true; b.textContent = "Atualizando…";
+  const before = state.items.length;
+  const ok = await loadArchive();
+  b.disabled = false; b.textContent = "Atualizar";
+  if (!ok) { toast("Não foi possível recarregar o acervo agora"); return; }
+  renderAll(); staleNotice();
+  const diff = state.items.length - before;
+  toast(diff > 0 ? `${diff} matéria${diff === 1 ? "" : "s"} nova${diff === 1 ? "" : "s"} · varredura ${fmtDateTime(state.meta.ultimaAtualizacao)}` : `Acervo em dia · varredura ${fmtDateTime(state.meta.ultimaAtualizacao)}`);
+});
+
+renderSubjects();
+(async () => {
+  const ok = await loadArchive();
+  if (!ok) {
+    state.loaded = true;
+    $("notice").innerHTML = `<div class="notice">Não foi possível carregar o acervo agora. Use o botão “Atualizar” ou recarregue a página mais tarde.</div>`;
+    renderAll(); return;
+  }
+  renderAll(); staleNotice();
 })();
 </script>
 
