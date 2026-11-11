@@ -1,5 +1,5 @@
 {
- "atualizadoEm": "2026-11-10T10:40:59Z",
+ "atualizadoEm": "2026-11-11T10:41:00Z",
  "materias": [
   {
    "adicionadoEm": "2026-11-05T10:41:22Z",
@@ -1142,6 +1142,72 @@
    ],
    "origem": "varredura",
    "adicionadoEm": "2026-11-10T10:40:22Z",
+   "verificada": true
+  },
+  {
+   "id": "md8318479",
+   "url": "https://www.jornaldocomercio.com/colunas/olha-so/2026/11/1268946-dupla-celebracao.html",
+   "titulo": "Dupla Celebração",
+   "veiculo": "Jornal do Comércio",
+   "data": "2026-11-03",
+   "dataAprox": false,
+   "resumo": "Coluna Olha Só, de Ivan Mattos, registra a recepção de aniversário de Rejane e Claudio Bier, presidente da FIERGS, na Casa NTX, em Porto Alegre. Dody Sirena é citado entre os convidados presentes.",
+   "assuntos": [
+    "Dody Sirena"
+   ],
+   "origem": "varredura",
+   "adicionadoEm": "2026-11-11T10:40:57Z",
+   "verificada": true
+  },
+  {
+   "id": "me6080a99",
+   "url": "https://www.tvpampa.com.br/serra-gaucha-ganhara-seu-maior-complexo-turistico-sirena-gramado/",
+   "titulo": "Serra Gaúcha ganhará seu maior complexo turístico: Sirena Gramado",
+   "veiculo": "TV Pampa",
+   "data": "2026-01-15",
+   "dataAprox": false,
+   "resumo": "Matéria apresenta o Sirena Gramado, empreendimento de mais de R$ 1 bilhão em 205 hectares entre Gramado e o Parque do Caracol, idealizado por Dody Sirena e gerido por Jaime Sirena, com o Club Med como parceiro hoteleiro. A primeira fase está prevista para 2027 e o projeto já tem aprovação da Fepam.",
+   "assuntos": [
+    "Dody Sirena",
+    "Jaime Sirena",
+    "Grupo Sirena",
+    "Sirena Gramado",
+    "Club Med Gramado"
+   ],
+   "origem": "varredura",
+   "adicionadoEm": "2026-11-11T10:40:57Z",
+   "verificada": true
+  },
+  {
+   "id": "m338827c5",
+   "url": "https://travelei.com.br/novo-resort-no-ceara/",
+   "titulo": "Conheça o novo resort bilionário que será inaugurado em 2027 no Ceará",
+   "veiculo": "Travelei",
+   "data": "2026-04-29",
+   "dataAprox": false,
+   "resumo": "Jaime Sirena, sócio do Grupo Sirena, e Thomas Bally, do Club Med, formalizaram em Fortaleza acordos com o Governo do Ceará e o município de Beberibe para o resort all inclusive do Club Med em Uruaú, com mais de 300 quartos e investimento total de R$ 1 bilhão. O texto cita previsão de lançamento para 2029.",
+   "assuntos": [
+    "Jaime Sirena",
+    "Grupo Sirena",
+    "Sirena Ceará"
+   ],
+   "origem": "varredura",
+   "adicionadoEm": "2026-11-11T10:40:57Z",
+   "verificada": true
+  },
+  {
+   "id": "m96b98c85",
+   "url": "https://extravip.net/livro-contando-a-vida-do-empresario-show-business-dody-sirena-sera-lancada-hoje-no-rio/",
+   "titulo": "Livro contando a vida do empresário do show business Dody Sirena será lançado no Rio",
+   "veiculo": "ExtraVIP",
+   "data": "2024-05-21",
+   "dataAprox": false,
+   "resumo": "Nota sobre o lançamento da biografia 'Dody Sirena: os bastidores do show business', escrita por Léa Penteado e publicada pela Matrix Editora, na Livraria da Travessa do Shopping Leblon, no Rio de Janeiro.",
+   "assuntos": [
+    "Dody Sirena"
+   ],
+   "origem": "varredura",
+   "adicionadoEm": "2026-11-11T10:40:57Z",
    "verificada": true
   }
  ],
