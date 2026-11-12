@@ -1,5 +1,5 @@
 {
- "atualizadoEm": "2026-11-11T10:41:00Z",
+ "atualizadoEm": "2026-11-12T10:40:21Z",
  "materias": [
   {
    "adicionadoEm": "2026-11-05T10:41:22Z",
@@ -1209,6 +1209,58 @@
    "origem": "varredura",
    "adicionadoEm": "2026-11-11T10:40:57Z",
    "verificada": true
+  },
+  {
+   "url": "https://voenews.com.br/pedra-fundamental-marca-inicio-das-obras-do-primeiro-club-med-exclusive-collection-da-america-do-sul-em-gramado/",
+   "titulo": "Pedra fundamental marca início das obras do primeiro Club Med Exclusive Collection da América do Sul, em Gramado",
+   "veiculo": "VOENEWS",
+   "data": "2026-03-22",
+   "dataAprox": false,
+   "resumo": "Cerimônia de pedra fundamental realizada em 20 de março de 2026 marcou o início das obras do Club Med Gramado, resort com 250 acomodações e 20 villas e inauguração prevista para 2027, integrante do complexo Sirena Gramado. A matéria cita a parceria com o Grupo Sirena e a DC Set Group, a presença de Dody Sirena e a gestão e incorporação da Star Ópera, sob o CEO Jaime Sirena.",
+   "assuntos": [
+    "Dody Sirena",
+    "Jaime Sirena",
+    "Grupo Sirena",
+    "Sirena Gramado",
+    "Club Med Gramado"
+   ],
+   "origem": "varredura",
+   "adicionadoEm": "2026-11-12T10:40:21Z",
+   "verificada": true,
+   "id": "m0856ca72"
+  },
+  {
+   "url": "https://blogdogerson.com.br/noticia/primeiro-vertiporto-de-gramado-ja-tem-local-definido",
+   "titulo": "Primeiro vertiporto de Gramado já tem local definido",
+   "veiculo": "Blog do Gerson",
+   "data": "2026-07-28",
+   "dataAprox": false,
+   "resumo": "A FlyBis, de Caxias do Sul, assinou protocolo de intenções com a Prefeitura de Gramado para implantar o primeiro vertiporto da cidade na área do complexo Sirena, no bairro Mato Queimado, com operações previstas para 2028. Jaime Sirena, CEO do Sirena Gramado, comenta que a mobilidade aérea avançada deixará de ser restrita aos grandes centros; o voo entre o Salgado Filho e o vertiporto deve durar 25 minutos.",
+   "assuntos": [
+    "Jaime Sirena",
+    "Sirena Gramado"
+   ],
+   "origem": "varredura",
+   "adicionadoEm": "2026-11-12T10:40:21Z",
+   "verificada": true,
+   "id": "mfc01b36d"
+  },
+  {
+   "url": "https://www.jornalnovaepoca.com.br/club-med-vem-ai/",
+   "titulo": "CLUB MED VEM AÍ",
+   "veiculo": "Jornal Nova Época",
+   "data": "2026-08-08",
+   "dataAprox": false,
+   "resumo": "Após visita às obras, o jornal de Canela informa que a primeira fase do complexo Sirena Gramado, em área de 205 hectares, está 20% concluída e dentro do cronograma, com entrega do Club Med prevista para novembro de 2027 e pista de esqui outdoor. O empresário Dody Sirena (grafado 'Dodi' na matéria) afirmou que a meta é atrair 1 milhão de visitantes por ano; o resort fica a 5 km dos centros de Gramado e de Canela.",
+   "assuntos": [
+    "Dody Sirena",
+    "Sirena Gramado",
+    "Club Med Gramado"
+   ],
+   "origem": "varredura",
+   "adicionadoEm": "2026-11-12T10:40:21Z",
+   "verificada": true,
+   "id": "mfde1c38c"
   }
  ],
  "removidas": []
